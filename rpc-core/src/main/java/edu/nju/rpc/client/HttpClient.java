@@ -1,4 +1,4 @@
-package edu.nju.rpc.test;
+package edu.nju.rpc.client;
 
 import edu.nju.rpc.invocation.Invocation;
 import org.apache.commons.io.IOUtils;
