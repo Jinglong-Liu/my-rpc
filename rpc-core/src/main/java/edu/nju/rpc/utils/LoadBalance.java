@@ -12,4 +12,7 @@ public class LoadBalance {
         int x = random.nextInt(list.size());
         return list.get(x);
     }
+    public static URL consistentHash(String hostAddr, List<URL> list) {
+        return ConsistentHashLoop.get(hostAddr,list);
+    }
 }

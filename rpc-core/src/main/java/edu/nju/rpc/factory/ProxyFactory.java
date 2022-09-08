@@ -11,6 +11,7 @@ import lombok.val;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.net.Inet4Address;
 import java.util.List;
 
 public class ProxyFactory<T> {
@@ -24,7 +25,9 @@ public class ProxyFactory<T> {
                 //注册中心
                 List<URL> urls = RemoteMapRegister.get(interfaceClass.getName());
                 //负载均衡
-                URL url = LoadBalance.random(urls);
+                String hostAddr = Inet4Address.getLocalHost().getHostAddress();
+                //URL url = LoadBalance.random(urls);
+                URL url = LoadBalance.consistentHash(hostAddr,urls);
 
                 String result = client.send(url.getHostName(),url.getPort(), invocation);
                 return result;
